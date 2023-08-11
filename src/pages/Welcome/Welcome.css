@@ -1,0 +1,22 @@
+.welcome{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 80%;
+}
+
+.welcome-logo{
+    padding: 10px;
+    overflow: hidden;
+    width: 50%;
+}
+
+.welcome-logo img{
+    object-fit: cover;
+}
+
+.welcome-text{
+    padding: 10px;
+    width: 50%;
+}
