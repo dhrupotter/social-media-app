@@ -57,7 +57,7 @@ export const UserPost = ({post}) => {
           <Avatar
             onClick={() => navigate(`/profile/${post.username}`)}
             size="md"
-            name="Ryan Florence"
+            name={post.username}
             src={post.avatar}
             cursor="pointer"
           />

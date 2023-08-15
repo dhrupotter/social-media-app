@@ -1,14 +1,16 @@
 import {
-  Avatar, Box, Button, Flex, Heading, Text,
+  Avatar,
+  Box, Button, Flex, Heading, Text,
 } from '@chakra-ui/react';
 import React from 'react';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io5';
 import * as BsIcons from 'react-icons/bs';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/auth.context';
 
 export default function LeftSidebar() {
-//   const navigate = useNavigate();
+  const { authState } = useAuth();
   return (
     <Box p={20} w="25%" h="auto">
       <Flex
@@ -67,13 +69,13 @@ export default function LeftSidebar() {
         gap={4}
         cursor="pointer"
       >
-        {/* <Avatar size="md" name="Ryan Florence" src={userInfo.avatar} /> */}
+        <Avatar size="md" name={`${authState.user.firstName} ${authState.user.lastName}`} src={authState.user.profileAvatar} />
         <Flex justifyContent="flex-start" flexDirection="column">
           <Heading size="sm">
-            Samyak Shah
+            {`${authState.user.firstName} ${authState.user.lastName}`}
           </Heading>
           <Text color="gray.500" fontSize="sm">
-            @samyakshah
+            {authState.user.username}
           </Text>
         </Flex>
         <Flex

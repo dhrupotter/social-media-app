@@ -37,7 +37,7 @@ export function FollowUserChip() {
             <Avatar
               onClick={() => navigate(`/profile/${item.username}`)}
               size="md"
-              name="Ryan Florence"
+              name={item.firstName}
               src={item.avatar}
             />
             <Flex justifyContent="flex-start" flexDirection="column">

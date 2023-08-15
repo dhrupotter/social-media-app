@@ -26,7 +26,7 @@ export function NewPost() {
     <Box w="100%" h="auto">
       <Box p={5} h={250} w="full" marginTop="70px" bg="white">
         <Flex gap={5}>
-          <Avatar size="md" name="Ryan Florence" src={authState?.user?.profileAvatar} />
+          <Avatar size="md" name={`${authState.user.firstName} ${authState.user.lastName}`} src={authState?.user?.profileAvatar} />
           <Flex gap={7} flexGrow={1} flexDirection="column">
             <Textarea
               onChange={(e) => setPostText(e.target.value)}
