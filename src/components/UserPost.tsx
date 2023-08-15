@@ -8,13 +8,29 @@ import * as VsIcons from "react-icons/vsc";
 import * as SiIcons from "react-icons/si"; 
 import { dislikePostService, likePostService } from '../services/posts.service';
 import { useData } from '../contexts/data.context';
+import { addBookmark, removeBookmark } from '../utils/userUtils';
 
 export const UserPost = ({post}) => {
     const {authState} = useAuth()
-    const { getAllPosts } = useData();
+    const { getAllPosts, dataDispatch, dataState } = useData();
     const user = authState.user
+    const bookmarks = dataState.bookmarks
     const navigate = useNavigate()
 
+    const bookmarkByUser = (selectedPostId) => {
+      return (
+        bookmarks?.filter((bookmark) => bookmark._id === selectedPostId)
+          .length !== 0
+      );
+    };
+  
+    const bookmarkHandler = async (postId) => {
+      if (bookmarkByUser(postId)) {
+        removeBookmark({_id: postId, token: authState.token, dataDispatch})
+      } else {
+        addBookmark({_id: postId, token: authState.token, dataDispatch})
+      }
+    };
 
     const likeByUser = (selectedPost) => {
         return (
@@ -115,7 +131,7 @@ export const UserPost = ({post}) => {
               </Modal> */}
 
               <AiIcons.AiOutlineShareAlt cursor="pointer" />
-{/* 
+
               {bookmarkByUser(post._id) ? (
                 <BsIcons.BsFillBookmarkCheckFill
                   onClick={() => bookmarkHandler(post._id)}
@@ -126,7 +142,7 @@ export const UserPost = ({post}) => {
                   onClick={() => bookmarkHandler(post._id)}
                   cursor="pointer"
                 />
-              )} */}
+              )}
               {post.username === "aron20" ? (
                 <>
                   {/* <Menu>

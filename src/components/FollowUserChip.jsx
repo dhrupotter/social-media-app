@@ -13,10 +13,6 @@ export function FollowUserChip() {
   const { authState, authDispatch } = useAuth();
   const { users } = dataState;
 
-  console.log(users);
-
-  console.log(authState.user);
-
   const handleFollowUser = async (followUser) => {
     await followUserService({ followUserId: followUser._id, encodedToken: authState.token });
     authDispatch({ type: 'setUser', payload: { ...authState.user, following: [...authState.user.following, followUser] } });
@@ -28,10 +24,6 @@ export function FollowUserChip() {
     getAllUsers();
     authDispatch({ type: 'setUser', payload: { ...authState.user, following: authState.user.following.filter((user) => user._id !== followUser._id) } });
   };
-
-  // const currentUser = users?.find(
-  //   (each) => each?.username === userInfo?.username
-  // );
 
   const allUsers = users?.filter(
     (eachUser) => eachUser.username !== authState.user.username,
