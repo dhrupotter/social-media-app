@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import "./Signup.css";
 import { signupService } from "../../services/auth.service";
+import { useEffect } from "react";
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -22,33 +23,29 @@ const Signup = () => {
     };
 
     const handleSubmit = async (e) => {
-        console.log(signupDetails);
         e.preventDefault();
+        console.log(signupDetails)
         try {
             const result = await signupService(signupDetails);
-            console.log(result)
-            authDispatch({ type: "setUser", payload: result.data.createdUser });
-            authDispatch({ type: "setToken", payload: result.data.encodedToken });
+            authDispatch({ type: "setUser", payload: result?.data?.createdUser });
+            authDispatch({ type: "setToken", payload: result?.data?.encodedToken });
         } catch (err) {
             console.log(err);
         }
-        console.log(authState)
-        if (authState.user !== null) {
-            navigate("/home");
-            toast.success("Signed up successfully", {
-                position: toast.POSITION.BOTTOM_RIGHT,
-            });
-        } else {
-            console.log("Enter signup details");
-            toast.error("Fill in all details", {
-                position: toast.POSITION.BOTTOM_RIGHT,
-            });
-        }
-    };
 
+    };
     const handleLogin = () => {
         navigate("/login");
     };
+
+    useEffect(() => {
+        if (authState.user !== null) {
+            navigate("/home");
+            toast.success("Signed up successfully");
+        } else {
+            toast.error("Fill in all details");
+        }
+    }, [authState.user, navigate]);
 
     return (
         <>
@@ -91,7 +88,7 @@ const Signup = () => {
                     />
                 </div>
                 <div className="signup-btn-container">
-                    <button className="signup-btn" onClick={e => handleSubmit(e)}>
+                    <button className="signup-btn" onClick={(e) => handleSubmit(e)}>
                         Sign Up
                     </button>
                 </div>

@@ -17,11 +17,9 @@ import sign from "jwt-encode";
 
 export const signupHandler = function (schema, request) {
   const { username, password, ...rest } = JSON.parse(request.requestBody);
-  console.log(username, password, rest)
   try {
     // check if username already exists
     const foundUser = schema.users.findBy({ username: username });
-    console.log(foundUser)
     if (foundUser) {
       return new Response(
         422,
@@ -44,14 +42,12 @@ export const signupHandler = function (schema, request) {
       following: [],
       bookmarks: [],
     };
-    console.log(newUser)
-    console.log(schema.users)
     const createdUser = schema.users.create(newUser);
-    
-    console.log(createdUser)
+
     const encodedToken = sign(
       { _id, username },
-      import.meta.env.REACT_APP_JWT_SECRET
+      import.meta.env.VITE_JWT_SECRET
+
     );
     return new Response(201, {}, { createdUser, encodedToken });
   } catch (error) {
@@ -89,7 +85,8 @@ export const loginHandler = function (schema, request) {
     if (password === foundUser.password) {
       const encodedToken = sign(
         { _id: foundUser._id, username },
-        import.meta.env.REACT_APP_JWT_SECRET
+        import.meta.env.VITE_JWT_SECRET
+
       );
       return new Response(200, {}, { foundUser, encodedToken });
     }
