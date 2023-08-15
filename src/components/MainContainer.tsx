@@ -21,11 +21,13 @@ export const MainContainer = () => {
   return (
    <Flex width="50%" flexDirection="column">
     <NewPost  />
-   {posts.map((post) => {
+    {posts.map((post) => {
           return <UserPost post={post} />;
-        })}
+    })}
+
     
-        </Flex>
+    
+   </Flex>
   )
 }
 

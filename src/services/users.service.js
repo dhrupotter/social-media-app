@@ -11,7 +11,7 @@ const getAllUsersService = async () => {
 
 const updateProfileService = async ({ editInput, encodedToken }) => {
   try {
-    const res = await axios.post('/api/users/edit', editInput, encodedToken);
+    const res = await axios.post('/api/users/edit', editInput, {}, { headers: { authorization: encodedToken } });
 
     return res;
   } catch (err) {
@@ -21,7 +21,7 @@ const updateProfileService = async ({ editInput, encodedToken }) => {
 
 const getBookmarkService = async (encodedToken) => {
   try {
-    const res = await axios.get('/api/users/bookmark/', encodedToken);
+    const res = await axios.get('/api/users/bookmark/', {}, { headers: { authorization: encodedToken } });
     return res;
   } catch (err) {
     console.log(err);
@@ -30,7 +30,7 @@ const getBookmarkService = async (encodedToken) => {
 
 const addBookmarkService = async ({ _id, encodedToken }) => {
   try {
-    const res = await axios.post(`/api/users/bookmark/${_id}`, encodedToken);
+    const res = await axios.post(`/api/users/bookmark/${_id}`, {}, { headers: { authorization: encodedToken } });
     return res;
   } catch (err) {
     console.log(err);
@@ -39,7 +39,7 @@ const addBookmarkService = async ({ _id, encodedToken }) => {
 
 const removeBookmarkService = async ({ _id, encodedToken }) => {
   try {
-    const res = await axios.post(`/api/users/remove-bookmark/${_id}`, encodedToken);
+    const res = await axios.post(`/api/users/remove-bookmark/${_id}`, {}, { headers: { authorization: encodedToken } });
     return res;
   } catch (err) {
     console.log(err);
@@ -48,7 +48,8 @@ const removeBookmarkService = async ({ _id, encodedToken }) => {
 
 const followUserService = async ({ followUserId, encodedToken }) => {
   try {
-    const res = await axios.post(`/api/users/follow/${followUserId}`, encodedToken);
+    const res = await axios.post(`/api/users/follow/${followUserId}`, {}, { headers: { authorization: encodedToken } });
+    console.log(res);
     return res;
   } catch (err) {
     console.log(err);
@@ -57,7 +58,7 @@ const followUserService = async ({ followUserId, encodedToken }) => {
 
 const unfollowUserService = async ({ followUserId, encodedToken }) => {
   try {
-    const res = await axios.post(`/api/users/unfollow/${followUserId}`, encodedToken);
+    const res = await axios.post(`/api/users/unfollow/${followUserId}`, {}, { headers: { authorization: encodedToken } });
     return res;
   } catch (err) {
     console.log(err);

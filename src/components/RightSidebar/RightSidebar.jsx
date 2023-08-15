@@ -1,5 +1,6 @@
 import { Box, Flex, Input } from '@chakra-ui/react';
 import React from 'react';
+import { FollowUserChip } from '../FollowUserChip';
 
 export default function RightSideBar() {
   return (

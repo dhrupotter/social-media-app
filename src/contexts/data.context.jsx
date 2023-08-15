@@ -29,9 +29,9 @@ export function DataProvider({ children }) {
   const getAllUsers = async () => {
     try {
       const res = await getAllUsersService();
-      const jsonRes = await res.json();
+      console.log(res, 'here');
       if (res.status === 200) {
-        dataDispatch({ type: 'setUsers', payload: jsonRes?.users });
+        dataDispatch({ type: 'setUsers', payload: res.data?.users });
       }
     } catch (err) {
       console.log(err);
@@ -58,14 +58,10 @@ export function DataProvider({ children }) {
     getAllPosts();
   }, []);
 
-  // useEffect(() => {
-  //   getBookmarks(token, dataDispatch);
-  // }, [token]);
-
   return (
     <DataContext.Provider
       value={{
-        dataState, dataDispatch, isPostsLoading, isUsersLoading, getAllPosts,
+        dataState, dataDispatch, isPostsLoading, isUsersLoading, getAllPosts, getAllUsers,
       }}
     >
       {children}
