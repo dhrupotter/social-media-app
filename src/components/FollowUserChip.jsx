@@ -10,19 +10,23 @@ import { followUserService, unfollowUserService } from '../services/users.servic
 export function FollowUserChip() {
   const navigate = useNavigate();
   const { dataState, getAllUsers } = useData();
-  const { authState } = useAuth();
+  const { authState, authDispatch } = useAuth();
   const { users } = dataState;
 
   console.log(users);
 
-  const handleFollowUser = async (followUserId) => {
-    await followUserService({ followUserId, encodedToken: authState.token });
+  console.log(authState.user);
+
+  const handleFollowUser = async (followUser) => {
+    await followUserService({ followUserId: followUser._id, encodedToken: authState.token });
+    authDispatch({ type: 'setUser', payload: { ...authState.user, following: [...authState.user.following, followUser] } });
     getAllUsers();
   };
 
-  const handleUnFollowUser = async (followUserId) => {
-    await unfollowUserService({ followUserId, encodedToken: authState.token });
+  const handleUnFollowUser = async (followUser) => {
+    await unfollowUserService({ followUser: followUser._id, encodedToken: authState.token });
     getAllUsers();
+    authDispatch({ type: 'setUser', payload: { ...authState.user, following: authState.user.following.filter((user) => user._id !== followUser._id) } });
   };
 
   // const currentUser = users?.find(
@@ -66,7 +70,7 @@ export function FollowUserChip() {
                 (userInfo) => userInfo.username === item.username,
               ) ? (
                 <Text
-                  onClick={() => handleUnFollowUser(item._id)}
+                  onClick={() => handleUnFollowUser(item)}
                   fontWeight="bold"
                   color="purple.600"
                 >
@@ -74,7 +78,7 @@ export function FollowUserChip() {
                 </Text>
                 ) : (
                   <Text
-                    onClick={() => handleFollowUser(item._id)}
+                    onClick={() => handleFollowUser(item)}
                     fontWeight="bold"
                     color="purple.600"
                   >
