@@ -32,6 +32,7 @@
     font-size: 55px;
     font-weight: 700;
     margin: 0px;
+    color: var(--primary-color);
 }
 
 .welcome-text .brand-name{
@@ -64,6 +65,6 @@
     margin: 10px 0px;
 }
 p{
-    /* margin: 5px 0px; */
+    
     font-size: 18px;
 }

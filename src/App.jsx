@@ -11,7 +11,6 @@ import Explore from './pages/Explore';
 function App() {
   return (
     <div className="App">
-
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/home" element={<Home />} />

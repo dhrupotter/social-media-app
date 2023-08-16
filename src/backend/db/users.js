@@ -1,4 +1,5 @@
-import { v4 as uuid } from 'uuid';
+/* eslint-disable import/no-extraneous-dependencies */
+import { v4 as uuidv4 } from 'uuid';
 import { formatDate } from '../utils/authUtils';
 /**
  * User Database can be added here.
@@ -7,7 +8,7 @@ import { formatDate } from '../utils/authUtils';
 
 export const users = [
   {
-    _id: uuid(),
+    _id: uuidv4(),
     firstName: 'Adarsh',
     lastName: 'Balika',
     username: 'adarshbalika',
@@ -22,7 +23,7 @@ export const users = [
     updatedAt: formatDate(),
   },
   {
-    _id: uuid(),
+    _id: uuidv4(),
     firstName: 'Dhruvi',
     lastName: 'Gandhi',
     username: 'dhruvigandhi254',
@@ -32,11 +33,11 @@ export const users = [
     updatedAt: formatDate(),
   },
   {
-    _id: uuid(),
-    firstName: 'Navneet',
-    lastName: 'Kumar',
-    username: 'navneetkumar',
-    password: 'navneetKumar123',
+    _id: uuidv4(),
+    firstName: 'Khushi',
+    lastName: 'Shah',
+    username: 'khushishah119',
+    password: 'khushishah119',
     bio: ' Lover of words. Books. 📚',
     website: 'https://www.amazon.in/Books',
     profileAvatar:
@@ -45,11 +46,11 @@ export const users = [
     updatedAt: formatDate(),
   },
   {
-    _id: uuid(),
-    firstName: 'Surya',
+    _id: uuidv4(),
+    firstName: 'Soham',
     lastName: 'Shah',
-    username: 'shahsurya',
-    password: 'suryaShah123',
+    username: 'shahsoham',
+    password: 'shahsoham2625',
     bio: 'Fitness addict. Healthy lifestyle. 💪',
     website: 'https://www.healthline.com/',
     profileAvatar:
@@ -58,11 +59,11 @@ export const users = [
     updatedAt: formatDate(),
   },
   {
-    _id: uuid(),
-    firstName: 'Shubham',
-    lastName: 'Soni',
-    username: 'shubhamsoni',
-    password: 'shubhamSoni123',
+    _id: uuidv4(),
+    firstName: 'Samyak',
+    lastName: 'Shah',
+    username: 'samshah3009',
+    password: 'samshah3009',
     bio: 'Wanderlust. Adventure seeker. ✈️',
     website: 'https://adventure.com/',
     profileAvatar:
