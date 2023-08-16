@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   Avatar, Box, Button, Flex, Textarea,
 } from '@chakra-ui/react';
@@ -33,7 +34,7 @@ export function NewPost() {
               placeholder="Write Something interesting..."
               _focus={{
                 border: '2px',
-                borderColor: 'purple.600',
+                borderColor: 'var(--primary-color)',
               }}
               value={postText}
               bg="#E5E5E5"
@@ -49,7 +50,12 @@ export function NewPost() {
                 <AiIcons.AiOutlineFileGif cursor="pointer" />
                 <AiIcons.AiOutlineSmile cursor="pointer" />
               </Flex>
-              <Button onClick={handleCreateNewPost} colorScheme="purple">
+              <Button
+                onClick={handleCreateNewPost}
+                bg="var(--primary-color)"
+                color="var(--text-primary-color)"
+                _hover={{ bg: 'var(--secondary-color)', color: 'var(--text-primary-color)' }}
+              >
                 Post this
               </Button>
             </Flex>

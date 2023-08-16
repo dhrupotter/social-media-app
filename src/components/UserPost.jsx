@@ -1,54 +1,54 @@
-import { Avatar, Box, Flex, Heading, Text } from '@chakra-ui/react';
-import React from 'react'
+/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable no-shadow */
+import {
+  Avatar, Box, Flex, Heading, Text,
+} from '@chakra-ui/react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as AiIcons from 'react-icons/ai';
+import * as BsIcons from 'react-icons/bs';
+// import * as VsIcons from 'react-icons/vsc';
+import * as SiIcons from 'react-icons/si';
 import { useAuth } from '../contexts/auth.context';
-import * as AiIcons from "react-icons/ai";
-import * as BsIcons from "react-icons/bs";
-import * as VsIcons from "react-icons/vsc";
-import * as SiIcons from "react-icons/si"; 
 import { dislikePostService, likePostService } from '../services/posts.service';
 import { useData } from '../contexts/data.context';
 import { addBookmark, removeBookmark } from '../utils/userUtils';
 
-export const UserPost = ({post}) => {
-    const {authState} = useAuth()
-    const { getAllPosts, dataDispatch, dataState } = useData();
-    const user = authState.user
-    const bookmarks = dataState.bookmarks
-    const navigate = useNavigate()
+export function UserPost({ post }) {
+  const { authState } = useAuth();
+  const { getAllPosts, dataDispatch, dataState } = useData();
+  const { user } = authState;
+  const { bookmarks } = dataState;
+  const navigate = useNavigate();
 
-    const bookmarkByUser = (selectedPostId) => {
-      return (
-        bookmarks?.filter((bookmark) => bookmark._id === selectedPostId)
-          .length !== 0
-      );
-    };
-  
-    const bookmarkHandler = async (postId) => {
-      if (bookmarkByUser(postId)) {
-        removeBookmark({_id: postId, token: authState.token, dataDispatch})
-      } else {
-        addBookmark({_id: postId, token: authState.token, dataDispatch})
-      }
-    };
+  const bookmarkByUser = (selectedPostId) => (
+    bookmarks?.filter((bookmark) => bookmark._id === selectedPostId)
+      .length !== 0
+  );
 
-    const likeByUser = (selectedPost) => {
-        return (
-          selectedPost.likes.likedBy?.filter(
-            (users) => users.username === user.username
-          ).length !== 0
-        );
-      };
-    
-      const likeHandler = async (post) => {
-        if (likeByUser(post)) {
-            await dislikePostService({_id: post._id, encodedToken: authState.token})
-            getAllPosts()
-        } else {
-            await likePostService({_id: post._id, encodedToken: authState.token})
-            getAllPosts()
-        }
-      };
+  const bookmarkHandler = async (postId) => {
+    if (bookmarkByUser(postId)) {
+      removeBookmark({ _id: postId, token: authState.token, dataDispatch });
+    } else {
+      addBookmark({ _id: postId, token: authState.token, dataDispatch });
+    }
+  };
+
+  const likeByUser = (selectedPost) => (
+    selectedPost.likes.likedBy?.filter(
+      (users) => users.username === user.username,
+    ).length !== 0
+  );
+
+  const likeHandler = async (post) => {
+    if (likeByUser(post)) {
+      await dislikePostService({ _id: post._id, encodedToken: authState.token });
+      getAllPosts();
+    } else {
+      await likePostService({ _id: post._id, encodedToken: authState.token });
+      getAllPosts();
+    }
+  };
 
   return (
     <div key={post._id}>
@@ -80,7 +80,9 @@ export const UserPost = ({post}) => {
                 color="gray.500"
                 cursor="pointer"
               >
-                @ {post.username}
+                @
+                {' '}
+                {post.username}
               </Text>
             </Flex>
             <Text textAlign="initial">{post.content}</Text>
@@ -88,7 +90,7 @@ export const UserPost = ({post}) => {
               <Flex gap={3} alignItems="center">
                 {likeByUser(post) ? (
                   <AiIcons.AiFillHeart
-                    bg="red"
+                    fill="red"
                     onClick={() => likeHandler(post)}
                     cursor="pointer"
                   />
@@ -99,7 +101,11 @@ export const UserPost = ({post}) => {
                   />
                 )}
 
-                <Box fontSize={15}> {post.likes.likeCount} </Box>
+                <Box fontSize={15}>
+                  {' '}
+                  {post.likes.likeCount}
+                  {' '}
+                </Box>
               </Flex>
               {/* <VsIcons.VscComment onClick={onOpen} cursor="pointer" /> */}
               {/* <Modal isOpen={isOpen} onClose={onClose}>
@@ -113,7 +119,7 @@ export const UserPost = ({post}) => {
                       onChange={commentTextHandler}
                       _focus={{
                         border: "2px",
-                        borderColor: "purple.600",
+                        borderColor: "var(--primary-color)",
                       }}
                       placeholder="Start Typing...."
                     />
@@ -143,7 +149,7 @@ export const UserPost = ({post}) => {
                   cursor="pointer"
                 />
               )}
-              {post.username === "aron20" ? (
+              {post.username === 'aron20' ? (
                 <>
                   {/* <Menu>
                     <MenuButton>
@@ -168,7 +174,7 @@ export const UserPost = ({post}) => {
                             <Textarea
                               _focus={{
                                 border: "2px",
-                                borderColor: "purple.600",
+                                borderColor: "var(--primary-color)",
                               }}
                               value={editPostInput}
                               onChange={(e) => setEditPostInput(e.target.value)}
@@ -193,7 +199,7 @@ export const UserPost = ({post}) => {
                 </>
               ) : (
                 <>
-                  {" "}
+                  {' '}
                   <SiIcons.SiSimpleanalytics cursor="pointer" />
                 </>
               )}
@@ -203,5 +209,5 @@ export const UserPost = ({post}) => {
         {/* <Comments eachPost={post} /> */}
       </Box>
     </div>
-  )
+  );
 }

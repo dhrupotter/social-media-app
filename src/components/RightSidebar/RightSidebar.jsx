@@ -16,7 +16,7 @@ export default function RightSideBar() {
         <Input
           _focus={{
             border: '2px',
-            borderColor: 'purple.600',
+            borderColor: 'var(--primary-color)',
           }}
           placeholder="Search Posts, People, anything"
           marginTop="70px"

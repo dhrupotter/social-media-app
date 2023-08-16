@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { Flex } from '@chakra-ui/react';
 import { useAuth } from '../../contexts/auth.context';
 import LeftSidebar from '../../components/LeftSidebar/LeftSidebar';
-import { MainContainer } from '../../components/MainContainer';
 import RightSideBar from '../../components/RightSidebar/RightSidebar';
+import { MainContainer } from '../../components/MainContainer';
 
 function Home() {
   const { authState } = useAuth();

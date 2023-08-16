@@ -55,7 +55,12 @@ export default function LeftSidebar() {
           </Text>
         </Flex>
         <Flex alignItems="center" gap={10}>
-          <Button w="full" colorScheme="purple">
+          <Button
+            w="full"
+            bg="var(--primary-color)"
+            color="var(--text-primary-color)"
+            _hover={{ bg: 'var(--secondary-color)', color: 'var(--text-primary-color)' }}
+          >
             Create Post
           </Button>
         </Flex>
@@ -68,13 +73,14 @@ export default function LeftSidebar() {
         w={260}
         gap={4}
         cursor="pointer"
+        alignItems="start"
       >
         <Avatar size="md" name={`${authState.user.firstName} ${authState.user.lastName}`} src={authState.user.profileAvatar} />
         <Flex justifyContent="flex-start" flexDirection="column">
-          <Heading size="sm">
+          <Heading size="sm" color="var(--primary-color)">
             {`${authState.user.firstName} ${authState.user.lastName}`}
           </Heading>
-          <Text color="gray.500" fontSize="sm">
+          <Text color="var(--text-secondary-color)" fontSize="sm">
             {authState.user.username}
           </Text>
         </Flex>

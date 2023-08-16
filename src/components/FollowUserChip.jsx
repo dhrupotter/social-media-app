@@ -33,7 +33,7 @@ export function FollowUserChip() {
     <div>
       {allUsers?.map((item) => (
         <div key={item._id}>
-          <Flex marginBottom={4} w={260} gap={4} cursor="pointer">
+          <Flex marginBottom={4} w={260} gap={4} cursor="pointer" justifyContent="space-between">
             <Avatar
               onClick={() => navigate(`/profile/${item.username}`)}
               size="md"
@@ -41,12 +41,12 @@ export function FollowUserChip() {
               src={item.avatar}
             />
             <Flex justifyContent="flex-start" flexDirection="column">
-              <Heading size="sm">
+              <Heading size="sm" textAlign="left" color="var(--primary-color)">
                 {' '}
                 {item.firstName}
                 {' '}
               </Heading>
-              <Text color="gray.500" fontSize="sm">
+              <Text color="var(--text-secondary-color)" fontSize="sm" textAlign="left">
                 @
                 {item.username}
               </Text>
@@ -55,6 +55,7 @@ export function FollowUserChip() {
               flexGrow={1}
               justifyContent="flex-end"
               alignItems="center"
+              textAlign="left"
               gap={10}
               cursor="pointer"
             >
@@ -64,7 +65,7 @@ export function FollowUserChip() {
                 <Text
                   onClick={() => handleUnFollowUser(item)}
                   fontWeight="bold"
-                  color="purple.600"
+                  color="var(--secondary-color )"
                 >
                   UnFollow
                 </Text>
@@ -72,7 +73,7 @@ export function FollowUserChip() {
                   <Text
                     onClick={() => handleFollowUser(item)}
                     fontWeight="bold"
-                    color="purple.600"
+                    color="var(--primary-color )"
                   >
                     Follow +
                   </Text>
