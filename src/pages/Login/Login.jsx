@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -28,9 +30,12 @@ function Login() {
     e.preventDefault();
     try {
       const result = await loginService(loginDetails);
+      console.log(loginDetails);
       console.log(result);
-      authDispatch({ type: 'setUser', payload: result.data.foundUser });
-      authDispatch({ type: 'setToken', payload: result.data.encodedToken });
+      localStorage.setItem('user', JSON.stringify(result?.data?.foundUser));
+      localStorage.setItem('token', JSON.stringify(result?.data?.encodedToken));
+      authDispatch({ type: 'setUser', payload: result?.data?.foundUser });
+      authDispatch({ type: 'setToken', payload: result?.data?.encodedToken });
     } catch (err) {
       console.log(err);
     }
@@ -50,8 +55,10 @@ function Login() {
   const handleLoginAsGuest = async () => {
     try {
       const result = await loginService(guestUser);
-      authDispatch({ type: 'setUser', payload: result.data.foundUser });
-      authDispatch({ type: 'setToken', payload: result.data.encodedToken });
+      localStorage.setItem('user', JSON.stringify(result?.data?.foundUser));
+      localStorage.setItem('token', JSON.stringify(result?.data?.encodedToken));
+      authDispatch({ type: 'setUser', payload: result?.data?.foundUser });
+      authDispatch({ type: 'setToken', payload: result?.data?.encodedToken });
       console.log(result);
     } catch (err) {
       console.log(err);
@@ -65,9 +72,9 @@ function Login() {
       <div className="login-field">
         <label>Username:</label>
         <input
-          name="email"
+          name="username"
           onChange={handleLoginDetails}
-          value={loginDetails.email}
+          value={loginDetails.username}
           placeholder="Enter username"
         />
       </div>

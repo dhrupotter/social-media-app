@@ -5,7 +5,7 @@ import { useAuth } from '../../contexts/auth.context';
 import LeftSidebar from '../../components/LeftSidebar/LeftSidebar';
 import RightSideBar from '../../components/RightSidebar/RightSidebar';
 import { MainContainer } from '../../components/MainContainer';
-import Navbar from '../../Navbar';
+import Navbar from '../../components/Navbar';
 
 function Home() {
   const { authState } = useAuth();

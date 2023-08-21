@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { toast } from 'react-toastify';
 import {
   addBookmarkService,
@@ -52,7 +53,7 @@ const followUser = async ({
     if (res.status === 200) {
       const newUsers = users.map((user) => {
         if (user?.username === res?.user?.username) {
-          return jsonRes?.user;
+          return res?.user;
         } if (user?.username === res?.followUser?.username) {
           return res?.followUser;
         }

@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-console */
 import axios from 'axios';
 
 const loginService = async (loginDetails) => {
@@ -11,6 +13,7 @@ const loginService = async (loginDetails) => {
 };
 
 const signupService = async (signupDetails) => {
+  console.log(signupDetails);
   try {
     const result = await axios.post('/api/auth/signup', signupDetails);
     return result;

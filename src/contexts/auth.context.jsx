@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import { createContext, useContext, useReducer } from 'react';
 import AuthReducer from '../reducers/AuthReducer';
 
 const DEFAULT_USER = {
-  user: JSON.parse(localStorage.getItem('user')),
-  token: JSON.parse(localStorage.getItem('token')),
+  user: JSON.parse(localStorage.getItem('user')) || null,
+  token: JSON.parse(localStorage.getItem('token')) || null,
+
 };
 
 const createAuth = createContext({});

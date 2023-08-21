@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
+/* eslint-disable consistent-return */
 import axios from 'axios';
 
 const getAllPostsService = async () => {
   try {
     const res = await axios.get('/api/posts');
-    console.log(res);
+    // console.log(res);
     return res;
   } catch (err) {
     console.log(err);
@@ -26,7 +28,7 @@ const createPostService = async ({
 };
 
 const editPostService = async ({
-  encodedToken, image, imageAlt, post, input,
+  encodedToken, image, imageAlt, post, input, user,
 }) => {
   try {
     const res = await axios.post(`/api/posts/edit/${post._id}`, {
